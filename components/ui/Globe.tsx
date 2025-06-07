@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
 import ThreeGlobe from "three-globe";
 import { Object3DNode, Canvas, extend } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { WebGLRendererConfig } from "./WebGLRenderer";
 import countries from "@/data/globe.json";
-import dynamic from "next/dynamic";
 
 declare module "@react-three/fiber" {
   interface ThreeElements {
@@ -82,22 +81,25 @@ export function Globe({ globeConfig, data }: WorldProps) {
 
   const globeRef = useRef<ThreeGlobe | null>(null);
 
-  const defaultProps = {
-    pointSize: 1,
-    atmosphereColor: "#ffffff",
-    showAtmosphere: true,
-    atmosphereAltitude: 0.1,
-    polygonColor: "rgba(255,255,255,0.7)",
-    globeColor: "#1d072e",
-    emissive: "#000000",
-    emissiveIntensity: 0.1,
-    shininess: 0.9,
-    arcTime: 2000,
-    arcLength: 0.9,
-    rings: 1,
-    maxRings: 3,
-    ...globeConfig,
-  };
+  const defaultProps = useMemo(
+    () => ({
+      pointSize: 1,
+      atmosphereColor: "#ffffff",
+      showAtmosphere: true,
+      atmosphereAltitude: 0.1,
+      polygonColor: "rgba(255,255,255,0.7)",
+      globeColor: "#1d072e",
+      emissive: "#000000",
+      emissiveIntensity: 0.1,
+      shininess: 0.9,
+      arcTime: 2000,
+      arcLength: 0.9,
+      rings: 1,
+      maxRings: 3,
+      ...globeConfig,
+    }),
+    [globeConfig]
+  );
 
   const _buildMaterial = useCallback(() => {
     if (!isMounted || !globeRef.current) return;
@@ -118,24 +120,22 @@ export function Globe({ globeConfig, data }: WorldProps) {
     if (!isMounted || !globeRef.current) return;
 
     const arcs = data;
-    let points = [];
-    for (let i = 0; i < arcs.length; i++) {
-      const arc = arcs[i];
-      points.push({
+    const points = arcs.flatMap((arc) => [
+      {
         size: defaultProps.pointSize,
         order: arc.order,
         color: (_t: number) => arc.color,
         lat: arc.startLat,
         lng: arc.startLng,
-      });
-      points.push({
+      },
+      {
         size: defaultProps.pointSize,
         order: arc.order,
         color: (_t: number) => arc.color,
         lat: arc.endLat,
         lng: arc.endLng,
-      });
-    }
+      },
+    ]);
 
     setGlobeData(points);
   }, [isMounted, data, defaultProps.pointSize]);
@@ -143,7 +143,6 @@ export function Globe({ globeConfig, data }: WorldProps) {
   const startAnimation = useCallback(() => {
     if (!isMounted || !globeRef.current || !globeData) return;
 
-    // Cast ThreeGlobe instance to any to bypass TypeScript checks
     const globe = globeRef.current as any;
 
     globe
@@ -195,44 +194,11 @@ export function Globe({ globeConfig, data }: WorldProps) {
     if (isMounted && globeRef.current) {
       _buildData();
       _buildMaterial();
-    }
-  }, [_buildData, _buildMaterial, isMounted]);
-
-  useEffect(() => {
-    if (isMounted && globeRef.current && globeData) {
       startAnimation();
     }
-  }, [isMounted, globeData, startAnimation]);
+  }, [_buildData, _buildMaterial, startAnimation, isMounted]);
 
-  useEffect(() => {
-    if (!isMounted || !globeRef.current || !globeData) return;
-
-    const interval = setInterval(() => {
-      if (!globeRef.current || !globeData) return;
-      numbersOfRings = genRandomNumbers(
-        0,
-        data.length,
-        Math.floor((data.length * 4) / 5)
-      );
-
-      const globe = globeRef.current as any;
-      globe.ringsData(globeData.filter((d, i) => numbersOfRings.includes(i)));
-    }, 2000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isMounted, globeData, data.length]);
-
-  if (!isMounted) {
-    return null;
-  }
-
-  return (
-    <>
-      <threeGlobe ref={globeRef} />
-    </>
-  );
+  return <threeGlobe ref={globeRef} args={[]} />;
 }
 
 export function World(props: WorldProps) {
@@ -272,12 +238,8 @@ export function World(props: WorldProps) {
       <OrbitControls
         enablePan={false}
         enableZoom={false}
-        minDistance={cameraZ}
-        maxDistance={cameraZ}
-        autoRotateSpeed={1}
-        autoRotate={true}
-        minPolarAngle={Math.PI / 3.5}
-        maxPolarAngle={Math.PI - Math.PI / 3}
+        minPolarAngle={Math.PI / 2.5}
+        maxPolarAngle={Math.PI / 2.5}
       />
     </Canvas>
   );

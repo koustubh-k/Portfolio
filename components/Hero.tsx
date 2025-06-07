@@ -66,48 +66,57 @@ const Hero = () => {
             cutting-edge tech.
           </p>
 
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-3 md:mt-4">
-            <a href="/resume1.pdf" target="_blank" rel="noopener noreferrer">
+          <div className="flex flex-wrap justify-center gap-3 mt-3 md:mt-4 w-full max-w-md">
+            <div className="w-[calc(33%-0.5rem)]">
+              <a href="/resume1.pdf" target="_blank" rel="noopener noreferrer">
+                <MagicButton
+                  title="Resume"
+                  icon={<HiOutlineDocumentDownload />}
+                  position="left"
+                  otherClasses="!mt-0 !w-full text-xs sm:text-sm"
+                />
+              </a>
+            </div>
+            <div className="w-[calc(33%-0.5rem)]">
+              <a
+                href="https://github.com/koustubh-k/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MagicButton
+                  title="GitHub"
+                  icon={<FaGithub />}
+                  position="left"
+                  otherClasses="!mt-0 !w-full text-xs sm:text-sm"
+                />
+              </a>
+            </div>
+            <div className="w-[calc(33%-0.5rem)]">
+              <a
+                href="https://www.linkedin.com/in/koustubh-kulkarni-35625a1aa/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <MagicButton
+                  title="LinkedIn"
+                  icon={<FaLinkedin />}
+                  position="left"
+                  otherClasses="!mt-0 !w-full text-xs sm:text-sm"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div className="mt-6 md:mt-8 w-full max-w-[200px]">
+            <a href="#about">
               <MagicButton
-                title="Resume"
-                icon={<HiOutlineDocumentDownload />}
-                position="left"
-                otherClasses="w-28 md:w-32 text-sm md:text-base"
-              />
-            </a>
-            <a
-              href="https://github.com/koustubh-k/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MagicButton
-                title="GitHub"
-                icon={<FaGithub />}
-                position="left"
-                otherClasses="w-28 md:w-32 text-sm md:text-base"
-              />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/koustubh-kulkarni-35625a1aa/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MagicButton
-                title="LinkedIn"
-                icon={<FaLinkedin />}
-                position="left"
-                otherClasses="w-28 md:w-32 text-sm md:text-base"
+                title="Learn More"
+                icon={<FaLocationArrow />}
+                position="right"
+                otherClasses="!mt-0"
               />
             </a>
           </div>
-
-          <a href="#about" className="mt-6 md:mt-8">
-            <MagicButton
-              title="Learn More"
-              icon={<FaLocationArrow />}
-              position="right"
-            />
-          </a>
         </div>
       </div>
     </div>
