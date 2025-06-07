@@ -1,6 +1,13 @@
 import {withSentryConfig} from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
+};
 
 export default withSentryConfig(nextConfig, {
 // For all available options, see:
