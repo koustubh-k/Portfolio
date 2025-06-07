@@ -1,35 +1,27 @@
 export const navItems = [
   { name: "About", link: "#about" },
+  { name: "Skills", link: "#skills" },
   { name: "Projects", link: "#projects" },
-  { name: "Testimonials", link: "#testimonials" },
+  { name: "Experience", link: "#experience" },
+  { name: "Domain Interest", link: "#domain-interest" },
   { name: "Contact", link: "#contact" },
 ];
 
 export const gridItems = [
   {
     id: 1,
-    title: "I prioritize client collaboration, fostering open communication ",
-    description: "",
-    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
+    title: "About Me",
+    description: "Computer Science Engineering Student from KLE Technological University, passionate about full-stack development and AI technologies.",
+    className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh] justify-center",
     imgClassName: "w-full h-full",
-    titleClassName: "justify-end",
+    titleClassName: "justify-center",
     img: "/b1.svg",
     spareImg: "",
   },
   {
     id: 2,
-    title: "I'm very flexible with time zone communications",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-    imgClassName: "",
-    titleClassName: "justify-start",
-    img: "",
-    spareImg: "",
-  },
-  {
-    id: 3,
-    title: "My tech stack",
-    description: "I constantly try to improve",
+    title: "Education",
+    description: "B.E. in Computer Science and Engineering from KLE Technological University, Hubli",
     className: "lg:col-span-2 md:col-span-3 md:row-span-2",
     imgClassName: "",
     titleClassName: "justify-center",
@@ -37,168 +29,135 @@ export const gridItems = [
     spareImg: "",
   },
   {
-    id: 4,
-    title: "Tech enthusiast with a passion for development.",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
+    id: 3,
+    title: "Certifications",
+    description: "Full-Stack Web Development (Udemy), Machine Learning Algorithms (Udemy), Javascript and Node.js (Scalar)",
+    className: "lg:col-span-2 md:col-span-3 md:row-span-2",
     imgClassName: "",
-    titleClassName: "justify-start",
-    img: "/grid.svg",
-    spareImg: "/b4.svg",
-  },
-
-  {
-    id: 5,
-    title: "Currently building a JS Animation library",
-    description: "The Inside Scoop",
-    className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-    titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/b5.svg",
-    spareImg: "/grid.svg",
-  },
-  {
-    id: 6,
-    title: "Do you want to start a project together?",
-    description: "",
-    className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
-    titleClassName: "justify-center md:max-w-full max-w-60 text-center",
+    titleClassName: "justify-center",
     img: "",
     spareImg: "",
-  },
+  },  
+  
+  
 ];
+
+export const skillCategories = {
+  "Languages": [
+    "C/C++",
+    "Python",
+    "JavaScript",
+    "HTML+CSS"
+  ],
+  "Web Development Tools": [
+    "Node.js",
+    "VS Code",
+    "Git",
+    "GitHub",
+    "Linux",
+    "Postman",
+    "Convex",
+    "Tailwind CSS"
+  ],
+  "Frameworks": [
+    "React.js",
+    "Express",
+    "Next.js"
+  ],
+  "Cloud & Databases": [
+    "MongoDB",
+    "Firebase",
+    "PostgreSQL"
+  ],
+  "Relevant Coursework": [
+    "Data Structures & Algorithms",
+    "Operating Systems",
+    "Object Oriented Programming",
+    "Database Management System",
+    "Software Engineering"
+  ],
+  "Areas of Interest": [
+    "Web Design and Development",
+    "Artificial Intelligence",
+    "Cloud Computing"
+  ],
+  "Soft Skills": [
+    "Problem Solving",
+    "Self-learning",
+    "Presentation",
+    "Adaptability"
+  ]
+};
 
 export const projects = [
   {
     id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/p1.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "/ui.earth.com",
-  },
-  {
-    id: 2,
-    title: "Yoom - Video Conferencing App",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/p2.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "/ui.yoom.com",
+    title: "StreamFlix",
+    des: "Netflix-inspired streaming platform with authentication and personalized recommendations using TMDB API.",
+    details: [
+      "Designed a dynamic and responsive movie browsing experience using real-time movie data from the TMDB API.",
+      "Implemented Firebase Authentication and Firestore database for user login and personalized content.",
+      "Technology Used: React, Firebase Auth, Firestore, TMDB API."
+    ],
+    img: "/stream_flix.png",
+    iconLists: ["/react.svg", "/firebase.svg", "/ts.svg", "/tmdb.svg"],
+    link: "https://stream-flix-cyan.vercel.app/",
   },
   {
     id: 3,
-    title: "AI Image SaaS - Canva Application",
-    des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/p3.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "/ui.aiimg.com",
-  },
-  {
-    id: 4,
-    title: "Animated Apple Iphone 3D Website",
-    des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-    img: "/p4.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    link: "/ui.apple.com",
-  },
-];
-
-export const testimonials = [
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-];
-
-export const companies = [
-  {
-    id: 1,
-    name: "cloudinary",
-    img: "/cloud.svg",
-    nameImg: "/cloudName.svg",
+    title: "Eraser - Collaborative Whiteboard",
+    des: "A web-based collaborative whiteboard application for real-time sketching and note-taking.",
+    details: [
+      "Implemented a feature-rich online whiteboard with real-time collaboration.",
+      "Technology Used: Next.js, Tailwind CSS, Convex, React, TypeScript."
+    ],
+    img: "/Eraser.png",
+    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/convex.svg", "/react.svg"],
+    link: "https://eraser-clone-eta.vercel.app/",
   },
   {
     id: 2,
-    name: "appwrite",
-    img: "/app.svg",
-    nameImg: "/appName.svg",
-  },
-  {
-    id: 3,
-    name: "HOSTINGER",
-    img: "/host.svg",
-    nameImg: "/hostName.svg",
+    title: "Real-time Chat App",
+    des: "Multi-room chat application with real-time messaging capabilities using Socket.io.",
+    details: [
+      "Built a real-time chat platform supporting multiple chat rooms with multiple users per room.",
+      "Implemented live messaging using WebSocket communication powered by Socket.io.",
+      "Technology Used: Node.js, Express.js, React, Socket.io."
+    ],
+    img: "/chatApp.jpg",
+    iconLists: ["/node.svg", "/express.svg", "/react.svg", "/socket.svg"],
+    link: "https://chat-app-basic-nine.vercel.app/",
   },
   {
     id: 4,
-    name: "stream",
-    img: "/s.svg",
-    nameImg: "/streamName.svg",
-  },
-  {
-    id: 5,
-    name: "docker.",
-    img: "/dock.svg",
-    nameImg: "/dockerName.svg",
+    title: "Facial Emotion Recognition",
+    des: "Vision Transformer deep-learning model for facial emotion recognition and engagement analysis.",
+    details: [
+      "Implemented Vision Transformer (ViT) for facial emotion recognition using a Kaggle dataset.",
+      "Utilized k-means clustering for unsupervised engagement level analysis.",
+      "Developed using Python, PyTorch/TensorFlow for deep learning model training."
+    ],
+    img: "/FER.png",
+    iconLists: ["/python.svg", "/pytorch.svg", "/opencv.svg", "/numpy.svg"],
+    link: "https://github.com/yourusername/emotion-recognition",
   },
 ];
 
-export const workExperience = [
+export const experience = [
   {
     id: 1,
-    title: "Frontend Engineer Intern",
-    desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
-    className: "md:col-span-2",
+    company: "Nvidia",
+    title: "LDR to HDR Image Reconstruction(Nvidia Project Internship)",
+    description: "Developed a deep learning system at Nvidia to convert LDR images to HDR. Trained neural networks to enhance image details and brightness, focusing on highlight recovery and visual quality improvement. Technologies: Python, PyTorch, OpenCV, NumPy.",
     thumbnail: "/exp1.svg",
   },
   {
     id: 2,
-    title: "Mobile App Dev - JSM Tech",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
-    className: "md:col-span-2", // change to md:col-span-2
+    company: "Nvidia",
+    title: "Camera Virtualization for AAOS(Nvidia Project Internship)",
+    description: "Implemented camera virtualization in Android Automotive OS at Nvidia using Linux and Android VMs. Developed virtual camera service and enabled efficient video transmission using V4L2, UDP streaming, and FFmpeg.",
     thumbnail: "/exp2.svg",
-  },
-  {
-    id: 3,
-    title: "Freelance App Dev Project",
-    desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp3.svg",
-  },
-  {
-    id: 4,
-    title: "Lead Frontend Developer",
-    desc: "Developed and maintained user-facing features using modern frontend technologies.",
-    className: "md:col-span-2",
-    thumbnail: "/exp4.svg",
-  },
+  }
 ];
 
 export const socialMedia = [

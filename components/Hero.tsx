@@ -1,4 +1,6 @@
 import { FaLocationArrow } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { HiOutlineDocumentDownload, HiMail, HiPhone } from "react-icons/hi";
 
 import MagicButton from "./MagicButton";
 import { Spotlight } from "./ui/Spotlight";
@@ -40,10 +42,10 @@ const Hero = () => {
         />
       </div>
 
-      <div className="flex justify-center relative my-20 z-10">
+      <div className="relative z-10 flex items-center justify-center">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
           <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
-            Dynamic Web Magic with Next.js
+            Full Stack Developer | AI Enthusiast
           </p>
 
           {/**
@@ -52,17 +54,52 @@ const Hero = () => {
            *  change md:text-6xl, add more responsive code
            */}
           <TextGenerateEffect
-            words="Transforming Concepts into Seamless User Experiences"
-            className="text-center text-[40px] md:text-5xl lg:text-6xl"
+            words="Koustubh Kulkarni"
+            className="text-center text-[40px] md:text-5xl lg:text-6xl mt-4"
           />
 
-          <p className="text-center md:tracking-wider mb-4 text-sm md:text-lg lg:text-2xl">
-            Hi! I&apos;m Adrian, a Next.js Developer based in Croatia.
+          <p className="text-center md:tracking-wider mb-8 text-sm md:text-lg lg:text-xl mt-4">
+            Crafting scalable, intelligent and interactive solutions with cutting-edge tech.
           </p>
 
-          <a href="#about">
+          <div className="flex gap-4 mt-4">
+            <a href="/resume1.pdf" target="_blank" rel="noopener noreferrer">
+              <MagicButton
+                title="Resume"
+                icon={<HiOutlineDocumentDownload />}
+                position="left"
+                otherClasses="w-32"
+              />
+            </a>
+            <a
+              href="https://github.com/koustubh-k/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MagicButton
+                title="GitHub"
+                icon={<FaGithub />}
+                position="left"
+                otherClasses="w-32"
+              />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/koustubh-kulkarni-35625a1aa/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MagicButton
+                title="LinkedIn"
+                icon={<FaLinkedin />}
+                position="left"
+                otherClasses="w-32"
+              />
+            </a>
+          </div>
+
+          <a href="#about" className="mt-8">
             <MagicButton
-              title="Show my work"
+              title="Learn More"
               icon={<FaLocationArrow />}
               position="right"
             />

@@ -1,4 +1,5 @@
 import { FaLocationArrow } from "react-icons/fa6";
+import { HiMail, HiPhone } from "react-icons/hi";
 
 import { socialMedia } from "@/data";
 import MagicButton from "./MagicButton";
@@ -7,34 +8,51 @@ const Footer = () => {
   return (
     <footer className="w-full pt-20 pb-10" id="contact">
       {/* background grid */}
-      <div className="w-full absolute left-0 -bottom-72 min-h-96">
+      <div className="relative">
         <img
           src="/footer-grid.svg"
-          alt="grid"
-          className="w-full h-full opacity-50 "
+          alt="footer"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
 
       <div className="flex flex-col items-center">
         <h1 className="heading lg:max-w-[45vw]">
-          Ready to take <span className="text-purple">your</span> digital
-          presence to the next level?
+          Let's <span className="text-purple">Connect</span>
         </h1>
-        <p className="text-white-200 md:mt-10 my-5 text-center">
-          Reach out to me today and let&apos;s discuss how I can help you
-          achieve your goals.
-        </p>
-        <a href="mailto:contact@jsmastery.pro">
-          <MagicButton
-            title="Let's get in touch"
-            icon={<FaLocationArrow />}
-            position="right"
-          />
-        </a>
+        
+        <div className="mt-10 flex flex-col items-center gap-6">
+          <div className="flex flex-col items-center gap-2">
+            <h2 className="text-2xl font-semibold">Koustubh Kulkarni</h2>
+            
+          </div>
+
+          <div className="flex flex-col items-center gap-4 mt-4">
+            <a href="mailto:kulkarni.k2004@gmail.com" 
+               className="flex items-center gap-2 text-white-200 hover:text-purple transition-colors">
+              <HiMail className="w-6 h-6" />
+              <span>kulkarni.k2004@gmail.com</span>
+            </a>
+            <a href="tel:+918660708395" 
+               className="flex items-center gap-2 text-white-200 hover:text-purple transition-colors">
+              <HiPhone className="w-6 h-6" />
+              <span>+91-8660708395</span>
+            </a>
+          </div>
+
+          <a href="mailto:kulkarni.k2004@gmail.com">
+            <MagicButton
+              title="Send me a message"
+              icon={<FaLocationArrow />}
+              position="right"
+            />
+          </a>
+        </div>
       </div>
+
       <div className="flex mt-16 md:flex-row flex-col justify-between items-center">
         <p className="md:text-base text-sm md:font-normal font-light">
-          Copyright © 2024 Adrian Hajdin
+          © 2024 Koustubh Kulkarni. All rights reserved.
         </p>
 
         <div className="flex items-center md:gap-3 gap-6">
