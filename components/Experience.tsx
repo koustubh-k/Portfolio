@@ -1,5 +1,5 @@
 import React from "react";
-
+import Image from "next/image";
 import { experience } from "@/data";
 import { Button } from "./ui/MovingBorders";
 
@@ -30,11 +30,15 @@ const Experience = () => {
             className="flex-1 text-black dark:text-white border-neutral-200 dark:border-slate-800"
           >
             <div className="flex lg:flex-row flex-col lg:items-center p-3 py-6 md:p-5 lg:p-10 gap-2">
-              <img
-                src={card.thumbnail}
-                alt={card.thumbnail}
-                className="lg:w-32 md:w-20 w-16"
-              />
+              <div className="relative lg:w-32 md:w-20 w-16 aspect-square">
+                <Image
+                  src={card.thumbnail}
+                  alt={`${card.title} thumbnail`}
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 64px, (max-width: 1024px) 80px, 128px"
+                />
+              </div>
               <div className="lg:ms-5">
                 <h1 className="text-start text-xl md:text-2xl font-bold">
                   {card.title}
