@@ -30,9 +30,11 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
               key={idx}
               className="border border-white/[0.3] rounded-lg bg-[#1a1a1a] w-8 h-8 flex items-center justify-center hover:bg-[#2a2a2a] transition-colors"
             >
-              <img 
+              <Image 
                 src={icon} 
                 alt={`tech-${idx}`} 
+                width={20}
+                height={20}
                 className="w-5 h-5"
                 style={{
                   filter: "brightness(0) invert(1)"

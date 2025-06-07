@@ -1,7 +1,7 @@
 "use client";
 
 import { FaLocationArrow } from "react-icons/fa6";
-
+import Image from "next/image";
 import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
 
@@ -27,10 +27,12 @@ const RecentProjects = () => {
                   className="relative w-full h-full overflow-hidden lg:rounded-3xl flex items-center justify-center"
                   style={{ backgroundColor: "#13162D" }}
                 >
-                  <img
+                  <Image
                     src={item.img}
                     alt={item.title}
                     className="z-10 h-full w-full object-contain"
+                    width={800}
+                    height={600}
                   />
                 </div>
               </div>
@@ -56,9 +58,11 @@ const RecentProjects = () => {
                       key={index}
                       className="border border-white/[0.3] rounded-lg bg-[#1a1a1a] w-8 h-8 flex items-center justify-center hover:bg-[#2a2a2a] transition-colors"
                     >
-                      <img 
+                      <Image 
                         src={icon} 
-                        alt={`tech-${index}`} 
+                        alt={`tech-${index}`}
+                        width={20}
+                        height={20} 
                         className="w-5 h-5"
                         style={{
                           filter: "brightness(0) invert(1)" // Makes SVGs white

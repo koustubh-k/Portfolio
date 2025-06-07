@@ -39,39 +39,67 @@ export const BackgroundGradientAnimation = ({
   const [curY, setCurY] = useState(0);
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
+  const [isSafari, setIsSafari] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
-    document.body.style.setProperty(
-      "--gradient-background-start",
-      gradientBackgroundStart
-    );
-    document.body.style.setProperty(
-      "--gradient-background-end",
-      gradientBackgroundEnd
-    );
-    document.body.style.setProperty("--first-color", firstColor);
-    document.body.style.setProperty("--second-color", secondColor);
-    document.body.style.setProperty("--third-color", thirdColor);
-    document.body.style.setProperty("--fourth-color", fourthColor);
-    document.body.style.setProperty("--fifth-color", fifthColor);
-    document.body.style.setProperty("--pointer-color", pointerColor);
-    document.body.style.setProperty("--size", size);
-    document.body.style.setProperty("--blending-value", blendingValue);
+    setIsMounted(true);
+    return () => setIsMounted(false);
   }, []);
 
   useEffect(() => {
-    function move() {
-      if (!interactiveRef.current) {
-        return;
-      }
-      setCurX(curX + (tgX - curX) / 20);
-      setCurY(curY + (tgY - curY) / 20);
-      interactiveRef.current.style.transform = `translate(${Math.round(
-        curX
-      )}px, ${Math.round(curY)}px)`;
+    if (typeof window === "undefined" || !isMounted) {
+      return;
     }
 
-    move();
-  }, [tgX, tgY]);
+    // Set initial styles only after mounting and in browser environment
+    const root = document.documentElement;
+    root.style.setProperty(
+      "--gradient-background-start",
+      gradientBackgroundStart
+    );
+    root.style.setProperty("--gradient-background-end", gradientBackgroundEnd);
+    root.style.setProperty("--first-color", firstColor);
+    root.style.setProperty("--second-color", secondColor);
+    root.style.setProperty("--third-color", thirdColor);
+    root.style.setProperty("--fourth-color", fourthColor);
+    root.style.setProperty("--fifth-color", fifthColor);
+    root.style.setProperty("--pointer-color", pointerColor);
+    root.style.setProperty("--size", size);
+    root.style.setProperty("--blending-value", blendingValue);
+
+    // Detect Safari browser
+    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
+  }, [
+    isMounted,
+    gradientBackgroundStart,
+    gradientBackgroundEnd,
+    firstColor,
+    secondColor,
+    thirdColor,
+    fourthColor,
+    fifthColor,
+    pointerColor,
+    size,
+    blendingValue,
+  ]);
+
+  useEffect(() => {
+    function move() {
+      if (curX && curY && tgX && tgY) {
+        setCurX((curX) => curX + (tgX - curX) / 20);
+        setCurY((curY) => curY + (tgY - curY) / 20);
+        if (interactiveRef.current) {
+          interactiveRef.current.style.transform = `translate(${Math.round(
+            curX
+          )}px, ${Math.round(curY)}px)`;
+        }
+      }
+    }
+
+    const animationFrame = requestAnimationFrame(move);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [curX, curY, tgX, tgY]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {
@@ -81,10 +109,10 @@ export const BackgroundGradientAnimation = ({
     }
   };
 
-  const [isSafari, setIsSafari] = useState(false);
-  useEffect(() => {
-    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
-  }, []);
+  // Return null or a loading state if not mounted yet
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <div
