@@ -8,21 +8,24 @@ import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 
 const Hero = () => {
   return (
-    <div className="pb-20 pt-36">
+    <div className="pb-12 md:pb-20 pt-24 md:pt-36">
       {/**
        *  UI: Spotlights
        *  Link: https://ui.aceternity.com/components/spotlight
        */}
       <div>
         <Spotlight
-          className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
+          className="-top-20 -left-4 sm:-left-10 md:-left-32 md:-top-20 h-[80vh] md:h-screen"
           fill="white"
         />
         <Spotlight
-          className="h-[80vh] w-[50vw] top-10 left-full"
+          className="h-[60vh] md:h-[80vh] w-[70vw] md:w-[50vw] top-10 left-[80%] md:left-full"
           fill="purple"
         />
-        <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
+        <Spotlight
+          className="left-1/2 md:left-80 top-28 h-[60vh] md:h-[80vh] w-[70vw] md:w-[50vw]"
+          fill="blue"
+        />
       </div>
 
       {/**
@@ -42,9 +45,9 @@ const Hero = () => {
         />
       </div>
 
-      <div className="relative z-10 flex items-center justify-center">
-        <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
+      <div className="relative z-10 flex items-center justify-center px-4 md:px-0">
+        <div className="w-full max-w-[95vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
+          <p className="uppercase tracking-widest text-[10px] md:text-xs text-center text-blue-100 max-w-80">
             Full Stack Developer | AI Enthusiast
           </p>
 
@@ -55,20 +58,21 @@ const Hero = () => {
            */}
           <TextGenerateEffect
             words="Koustubh Kulkarni"
-            className="text-center text-[40px] md:text-5xl lg:text-6xl mt-4"
+            className="text-center text-3xl sm:text-[40px] md:text-5xl lg:text-6xl mt-3 md:mt-4"
           />
 
-          <p className="text-center md:tracking-wider mb-8 text-sm md:text-lg lg:text-xl mt-4">
-            Crafting scalable, intelligent and interactive solutions with cutting-edge tech.
+          <p className="text-center md:tracking-wider mb-6 md:mb-8 text-xs sm:text-sm md:text-lg lg:text-xl mt-3 md:mt-4 px-2 md:px-0">
+            Crafting scalable, intelligent and interactive solutions with
+            cutting-edge tech.
           </p>
 
-          <div className="flex gap-4 mt-4">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mt-3 md:mt-4">
             <a href="/resume1.pdf" target="_blank" rel="noopener noreferrer">
               <MagicButton
                 title="Resume"
                 icon={<HiOutlineDocumentDownload />}
                 position="left"
-                otherClasses="w-32"
+                otherClasses="w-28 md:w-32 text-sm md:text-base"
               />
             </a>
             <a
@@ -80,7 +84,7 @@ const Hero = () => {
                 title="GitHub"
                 icon={<FaGithub />}
                 position="left"
-                otherClasses="w-32"
+                otherClasses="w-28 md:w-32 text-sm md:text-base"
               />
             </a>
             <a
@@ -92,12 +96,12 @@ const Hero = () => {
                 title="LinkedIn"
                 icon={<FaLinkedin />}
                 position="left"
-                otherClasses="w-32"
+                otherClasses="w-28 md:w-32 text-sm md:text-base"
               />
             </a>
           </div>
 
-          <a href="#about" className="mt-8">
+          <a href="#about" className="mt-6 md:mt-8">
             <MagicButton
               title="Learn More"
               icon={<FaLocationArrow />}
