@@ -4,133 +4,6 @@ import Image from "next/image";
 
 const domainCases = [
   {
-    title: "Microsoft Teams – Org Chart Tree",
-    businessCase:
-      "Display dynamic organizational hierarchies to provide users with context about team roles and reporting structures.",
-    dsAlgo:
-      "Tree data structure for hierarchy representation; depth-first traversal for rendering subtrees.",
-    codeSnippet: `// Build and traverse org tree
-class Employee {
-  constructor(id, managerId) {
-    this.id = id;
-    this.children = [];
-  }
-}
-
-const buildOrgTree = (employees) => {
-  const nodes = {};
-  employees.forEach(e => (nodes[e.id] = new Employee(e.id, e.managerId)));
-  let root = null;
-  employees.forEach(e => {
-    if (!e.managerId) root = nodes[e.id];
-    else nodes[e.managerId].children.push(nodes[e.id]);
-  });
-  return root;
-};`,
-    image: null,
-    efficiency: "Time: O(N) build/traverse; Space: O(N).",
-    buildingStory:
-      "Engineers leveraged Active Directory data to dynamically render org charts used within Teams.",
-    connection:
-      "Tree traversal powers instant UX, linking directory services to UI components.",
-    inference:
-      "Efficient tree modeling enables scalable visualization for large enterprises.",
-  },
-  {
-    title: "SQL Server – B+Tree Indexes",
-    businessCase:
-      "Accelerate data retrieval and range queries on large tables by maintaining balanced on-disk indexes.",
-    dsAlgo: "B+Tree data structure; search, insert, delete in O(log n) time.",
-    codeSnippet: `function searchBTree(node, key) {
-  let i = 0;
-  while (i < node.keys.length && key > node.keys[i]) i++;
-  if (node.isLeaf) return node.pointers[i];
-  return searchBTree(node.children[i], key);
-}`,
-    image: null,
-    efficiency:
-      "Search/insert/delete: O(log n) I/O operations; Space: O(n) pages.",
-    buildingStory:
-      "Adopted from classic database theory to ensure predictable query performance.",
-    connection:
-      "Indexes underlie SQL performance, directly impacting every data-driven application.",
-    inference:
-      "B+Trees remain the industry standard for scalable database indexing.",
-  },
-  {
-    title: "Exchange Server – Message Queues",
-    businessCase:
-      "Ensure ordered, reliable mail delivery and back-pressure control in the transport pipeline.",
-    dsAlgo:
-      "FIFO queue with retry scheduling; O(1) enqueue/dequeue operations.",
-    codeSnippet: `const queue = [];
-function processQueue() {
-  while (queue.length) {
-    const msg = queue.shift();
-    if (deliver(msg)) continue;
-    scheduleRetry(msg);
-    queue.push(msg);
-  }
-}`,
-    image: null,
-    efficiency: "Enqueue/dequeue: O(1); retry adds constant overhead.",
-    buildingStory:
-      "Built resilient pipelines using queues to decouple transport components.",
-    connection:
-      "Message queues enable scalable, fault-tolerant architectures across distributed services.",
-    inference:
-      "Simple queues form the backbone of reliable enterprise messaging.",
-  },
-  {
-    title: "System Center – Dependency DAG + Topological Sort",
-    businessCase:
-      "Model service dependencies to orchestrate alerts and remediation in correct order.",
-    dsAlgo:
-      "Directed acyclic graph for dependencies; topological sort for sequencing.",
-    codeSnippet: `function topoSort(graph) {
-  const inDegree = {};
-  Object.keys(graph).forEach(node => (inDegree[node] = 0));
-  Object.values(graph).forEach(neighbors => neighbors.forEach(n => inDegree[n]++));
-  const queue = Object.keys(inDegree).filter(n => inDegree[n] === 0);
-  const order = [];
-  while (queue.length) {
-    const u = queue.shift();
-    order.push(u);
-    graph[u].forEach(v => {
-      inDegree[v]--;
-      if (inDegree[v] === 0) queue.push(v);
-    });
-  }
-  return order;
-}`,
-    image: null,
-    efficiency: "Topological sort: O(N+E); Space: O(N+E).",
-    buildingStory:
-      "Encoded complex service topologies to drive automated monitoring workflows.",
-    connection:
-      "DAGs capture dependencies critical for root-cause analysis in large systems.",
-    inference:
-      "Graph algorithms underpin effective service orchestration and alerting.",
-  },
-  {
-    title: "Dynamics 365 – Logistics Assignment & Capacity",
-    businessCase:
-      "Optimize product-to-warehouse assignments minimizing cost under capacity constraints.",
-    dsAlgo:
-      "Hungarian algorithm (O(n^3)) for assignment; Knapsack DP for capacity.",
-    codeSnippet: `// Pseudocode outline
-const assignment = hungarian(costMatrix);
-const capacityOk = knapsackDP(items, capacity);`,
-    image: null,
-    efficiency: "Hungarian: O(n^3); Knapsack: O(nW).",
-    buildingStory:
-      "Integrated classical operations-research methods into ERP workflows.",
-    connection:
-      "Combines assignment and knapsack to solve real-world supply-chain problems.",
-    inference:
-      "Algorithmic planning drives measurable cost savings in logistics.",
-  },
-  {
     title: "Visual Studio – AST Tree & Call Graph",
     businessCase:
       "Enable code navigation, refactoring, and IntelliSense through static analysis.",
@@ -139,7 +12,7 @@ const capacityOk = knapsackDP(items, capacity);`,
 ast.functions.forEach(fn => {
   callGraph[fn.name] = fn.calls;
 });`,
-    image: null,
+    image: "/VSCodeImg.png",
     efficiency: "AST parse: O(N); graph edges: O(F+C).",
     buildingStory:
       "Leveraged compiler techniques to power developer productivity features.",
@@ -163,7 +36,7 @@ ast.functions.forEach(fn => {
     queue.push(...c.parents);
   }
 }`,
-    image: null,
+    image: "/GitHub.png",
     efficiency: "LCA find: O(N) traversal; Space: O(N).",
     buildingStory:
       "Implemented DAG-based commit graph underpinning Git’s collaboration model.",
@@ -171,6 +44,101 @@ ast.functions.forEach(fn => {
     inference:
       "Graph-based versioning is foundational to modern software collaboration.",
   },
+  {
+    title: "Exchange Server – Message Queues",
+    businessCase:
+      "Ensure ordered, reliable mail delivery and back-pressure control in the transport pipeline.",
+    dsAlgo:
+      "FIFO queue with retry scheduling; O(1) enqueue/dequeue operations.",
+    codeSnippet: `const queue = [];
+function processQueue() {
+  while (queue.length) {
+    const msg = queue.shift();
+    if (deliver(msg)) continue;
+    scheduleRetry(msg);
+    queue.push(msg);
+  }
+}`,
+    image: "/MessageQueue.png",
+    efficiency: "Enqueue/dequeue: O(1); retry adds constant overhead.",
+    buildingStory:
+      "Built resilient pipelines using queues to decouple transport components.",
+    connection:
+      "Message queues enable scalable, fault-tolerant architectures across distributed services.",
+    inference:
+      "Simple queues form the backbone of reliable enterprise messaging.",
+  },
+  {
+    title: "System Center – Dependency DAG + Topological Sort",
+    businessCase:
+      "Model service dependencies to orchestrate alerts and remediation in correct order.",
+    dsAlgo:
+      "Directed acyclic graph for dependencies; topological sort for sequencing.",
+    codeSnippet: `function topoSort(graph) {
+      const inDegree = {};
+  Object.keys(graph).forEach(node => (inDegree[node] = 0));
+  Object.values(graph).forEach(neighbors => neighbors.forEach(n => inDegree[n]++));
+  const queue = Object.keys(inDegree).filter(n => inDegree[n] === 0);
+  const order = [];
+  while (queue.length) {
+    const u = queue.shift();
+    order.push(u);
+    graph[u].forEach(v => {
+      inDegree[v]--;
+      if (inDegree[v] === 0) queue.push(v);
+      });
+      }
+      return order;
+      }`,
+    image: "/TopologicalSort.png",
+    efficiency: "Topological sort: O(N+E); Space: O(N+E).",
+    buildingStory:
+      "Encoded complex service topologies to drive automated monitoring workflows.",
+    connection:
+      "DAGs capture dependencies critical for root-cause analysis in large systems.",
+    inference:
+      "Graph algorithms underpin effective service orchestration and alerting.",
+  },
+  {
+    title: "Dynamics 365 – Logistics Assignment & Capacity",
+    businessCase:
+      "Optimize product-to-warehouse assignments minimizing cost under capacity constraints.",
+    dsAlgo:
+      "Hungarian algorithm (O(n^3)) for assignment; Knapsack DP for capacity.",
+    codeSnippet: `// Pseudocode outline
+const assignment = hungarian(costMatrix);
+const capacityOk = knapsackDP(items, capacity);`,
+    image: "/Knapsack.png",
+    efficiency: "Hungarian: O(n^3); Knapsack: O(nW).",
+    buildingStory:
+      "Integrated classical operations-research methods into ERP workflows.",
+    connection:
+      "Combines assignment and knapsack to solve real-world supply-chain problems.",
+    inference:
+      "Algorithmic planning drives measurable cost savings in logistics.",
+  },
+  {
+    title: "SQL Server – B+Tree Indexes",
+    businessCase:
+      "Accelerate data retrieval and range queries on large tables by maintaining balanced on-disk indexes.",
+    dsAlgo: "B+Tree data structure; search, insert, delete in O(log n) time.",
+    codeSnippet: `function searchBTree(node, key) {
+  let i = 0;
+  while (i < node.keys.length && key > node.keys[i]) i++;
+  if (node.isLeaf) return node.pointers[i];
+  return searchBTree(node.children[i], key);
+  }`,
+    image: "/B+Tree.png",
+    efficiency:
+      "Search/insert/delete: O(log n) I/O operations; Space: O(n) pages.",
+    buildingStory:
+      "Adopted from classic database theory to ensure predictable query performance.",
+    connection:
+      "Indexes underlie SQL performance, directly impacting every data-driven application.",
+    inference:
+      "B+Trees remain the industry standard for scalable database indexing.",
+  },
+
   {
     title: "Copilot for Excel – Smart Data Analysis",
     businessCase:
@@ -190,7 +158,7 @@ ast.functions.forEach(fn => {
     elif spec.type == "python":
         result = exec_python(spec.code, sheet_data)
         sheet.insert(result)`,
-    image: null,
+    image: "/Copilaot1.png",
     efficiency:
       "Time: O(1) LLM call + O(n·m) for table operations. Space: Same as workbook size. Human time saved—minutes to seconds.",
     buildingStory:
@@ -217,7 +185,7 @@ ast.functions.forEach(fn => {
     summary = llm_summarize(transcript.text)
     return Transcript(text=transcript.text), 
            Summary(summary), Tasks(tasks)`,
-    image: null,
+    image: "/Copilot2.png",
     efficiency:
       "ASR + diarization: real-time, summarization <2s per 30min call. Saves ~26 minutes daily per user.",
     buildingStory:
