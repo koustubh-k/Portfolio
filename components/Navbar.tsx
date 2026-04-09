@@ -60,7 +60,7 @@ export default function Navbar({ site }: NavbarProps) {
         <nav
           className={`section-shell flex h-16 items-center justify-between transition-all duration-300 ${
             hasScrolled
-              ? "surface-card bg-[color-mix(in_srgb,var(--bg-surface)_85%,transparent)] backdrop-blur-xl"
+              ? "surface-card bg-[color:var(--bg-surface-85)] backdrop-blur-xl"
               : "bg-transparent"
           }`}
         >

@@ -2,6 +2,7 @@
 import path from "node:path";
 import matter from "gray-matter";
 import { cache } from "react";
+import { hexToRgba } from "./color";
 
 export type AnimationSpeed = "subtle" | "medium" | "heavy";
 
@@ -655,10 +656,20 @@ export function getAnimationConfig(speed: AnimationSpeed): AnimationConfig {
 export function getThemeCssVariables(theme: ThemeTokens): Record<string, string> {
   return {
     "--accent-primary": theme.accent_primary,
+    "--accent-primary-12": hexToRgba(theme.accent_primary, 0.12),
+    "--accent-primary-25": hexToRgba(theme.accent_primary, 0.25),
+    "--accent-primary-26": hexToRgba(theme.accent_primary, 0.26),
+    "--accent-primary-55": hexToRgba(theme.accent_primary, 0.55),
     "--accent-secondary": theme.accent_secondary,
+    "--accent-secondary-10": hexToRgba(theme.accent_secondary, 0.1),
+    "--accent-secondary-20": hexToRgba(theme.accent_secondary, 0.2),
+    "--accent-secondary-70": hexToRgba(theme.accent_secondary, 0.7),
     "--accent-glow": theme.accent_glow,
+    "--accent-glow-36": hexToRgba(theme.accent_glow, 0.36),
     "--bg-base": theme.bg_base,
     "--bg-surface": theme.bg_surface,
+    "--bg-surface-85": hexToRgba(theme.bg_surface, 0.85),
+    "--bg-surface-90": hexToRgba(theme.bg_surface, 0.9),
     "--bg-surface-2": theme.bg_surface_2,
     "--text-primary": theme.text_primary,
     "--text-secondary": theme.text_secondary,

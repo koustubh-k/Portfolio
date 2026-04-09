@@ -69,7 +69,7 @@ export default function Hero({ site, motionConfig }: HeroProps) {
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          background: `radial-gradient(420px circle at ${spotlight.x}% ${spotlight.y}%, color-mix(in srgb, var(--accent-glow) 36%, transparent), transparent 62%)`,
+          background: `radial-gradient(420px circle at ${spotlight.x}% ${spotlight.y}%, var(--accent-glow-36), transparent 62%)`,
         }}
       />
 
@@ -126,7 +126,13 @@ export default function Hero({ site, motionConfig }: HeroProps) {
             transition={{ duration: motionConfig.duration, delay: 0.24 }}
           >
             <div className="relative inline-flex rounded-[var(--radius)] p-[1px]">
-              <span className="absolute inset-0 animate-[spin_3.2s_linear_infinite] rounded-[var(--radius)] bg-[conic-gradient(from_180deg,var(--accent-primary),color-mix(in_srgb,var(--accent-primary)_25%,transparent),var(--accent-primary))]" />
+              <span
+                className="absolute inset-0 animate-[spin_3.2s_linear_infinite] rounded-[var(--radius)]"
+                style={{
+                  background:
+                    "conic-gradient(from 180deg, var(--accent-primary), var(--accent-primary-25), var(--accent-primary))",
+                }}
+              />
               <a
                 className="relative inline-flex h-12 min-w-[150px] items-center justify-center rounded-[var(--radius)] bg-[color:var(--bg-base)] px-5 text-sm font-semibold"
                 href="#projects"

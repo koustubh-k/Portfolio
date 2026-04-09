@@ -61,9 +61,9 @@ export default function About({ site, motionConfig }: AboutProps) {
                   key={interest}
                   className="rounded-full border px-4 py-2 text-sm"
                   style={{
-                    borderColor: "color-mix(in srgb, var(--accent-secondary) 70%, transparent)",
+                    borderColor: "var(--accent-secondary-70)",
                     color: "var(--text-primary)",
-                    boxShadow: "0 0 20px color-mix(in srgb, var(--accent-secondary) 20%, transparent)",
+                    boxShadow: "0 0 20px var(--accent-secondary-20)",
                   }}
                 >
                   {interest}
