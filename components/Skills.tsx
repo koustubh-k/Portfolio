@@ -1,90 +1,59 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+﻿"use client";
 
-const skillCategories = {
-  "Programming Languages": [
-    "C/C++",
-    "Python",
-    "JavaScript",
-    "TypeScript",
-    "HTML+CSS"
-  ],
-  "Web Development Tools": [
-    "VS Code",
-    "Git",
-    "GitHub",
-    "Linux",
-    "Postman",
-    "Tailwind CSS"
-  ],
-  "Frameworks": [
-    "Node.js",
-    "React.js",
-    "Express",
-    "Next.js"
-  ],
-  "Cloud & Databases": [
-    "MongoDB",
-    "Firebase",
-    "PostgreSQL",
-    "ConvexDb"
-  ],
-  "Relevant Coursework": [
-    "Data Structures & Algorithms",
-    "Operating Systems",
-    "Object Oriented Programming",
-    "Database Management System",
-    "Software Engineering"
-  ],
-  "Areas of Interest": [
-    "Web Design and Development",
-    "Artificial Intelligence",
-    "Cloud Computing"
-  ],
-  "Soft Skills": [
-    "Problem Solving",
-    "Self-learning",
-    "Presentation",
-    "Adaptability"
-  ]
+import { motion } from "framer-motion";
+
+import type { AnimationConfig, SiteContent } from "@/lib/content";
+import { hexToRgba } from "@/lib/color";
+
+type SkillsProps = {
+  site: SiteContent;
+  motionConfig: AnimationConfig;
 };
 
-const SkillCard = ({ category, skills }: { category: string; skills: string[] }) => {
+export default function Skills({ site, motionConfig }: SkillsProps) {
+  if (site.skills.length === 0) {
+    return null;
+  }
+
+  const hoverBorderColor = hexToRgba(site.theme.accent_secondary, 0.75);
+  const hoverGlow = `0 0 14px ${hexToRgba(site.theme.accent_secondary, 0.2)}`;
+  const baseBorderColor = "rgba(255, 255, 255, 0.15)";
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="bg-black-200 rounded-xl p-6 backdrop-blur-lg border border-black-300"
-    >
-      <h3 className="text-xl font-semibold mb-4 text-purple">{category}</h3>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill, index) => (
-          <span
-            key={index}
-            className="bg-black-300 text-white px-3 py-1 rounded-full text-sm"
+    <section className="section-shell py-14" id="skills">
+      <h2 className="section-title">{site.ui.section_titles.skills}</h2>
+
+      <div className="mt-8 space-y-5">
+        {site.skills.map((group, index) => (
+          <motion.article
+            className="surface-card p-5 md:p-6"
+            key={`${group.category}-${index}`}
+            initial={{ opacity: 0, y: motionConfig.distance }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: motionConfig.duration, delay: index * motionConfig.stagger }}
           >
-            {skill}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
-
-const Skills = () => {
-  return (
-    <section id="skills" className="py-20">
-      <h2 className="heading mb-12">
-        Technical <span className="text-purple">Skills</span>
-      </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {Object.entries(skillCategories).map(([category, skills]) => (
-          <SkillCard key={category} category={category} skills={skills} />
+            <h3 className="text-lg font-semibold md:text-xl">{group.category}</h3>
+            <div className="mt-4 flex flex-wrap gap-2.5">
+              {group.items.map((skill) => (
+                <motion.span
+                  className="rounded-full border border-white/15 px-3 py-1.5 text-sm muted-copy"
+                  key={skill}
+                  style={{ borderColor: baseBorderColor, boxShadow: "0 0 0 rgba(0, 0, 0, 0)" }}
+                  whileHover={{
+                    scale: 1.05,
+                    borderColor: hoverBorderColor,
+                    boxShadow: hoverGlow,
+                  }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {skill}
+                </motion.span>
+              ))}
+            </div>
+          </motion.article>
         ))}
       </div>
     </section>
   );
-};
-
-export default Skills; 
+}

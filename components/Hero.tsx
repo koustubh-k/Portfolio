@@ -1,126 +1,199 @@
-import { FaLocationArrow } from "react-icons/fa6";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { HiOutlineDocumentDownload, HiMail, HiPhone } from "react-icons/hi";
+﻿"use client";
 
-import MagicButton from "./MagicButton";
-import { Spotlight } from "./ui/Spotlight";
-import { TextGenerateEffect } from "./ui/TextGenerateEffect";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Github, Linkedin, Mail } from "lucide-react";
 
-const Hero = () => {
-  return (
-    <div className="pb-12 md:pb-20 pt-24 md:pt-36">
-      {/**
-       *  UI: Spotlights
-       *  Link: https://ui.aceternity.com/components/spotlight
-       */}
-      <div>
-        <Spotlight
-          className="-top-20 -left-4 sm:-left-10 md:-left-32 md:-top-20 h-[80vh] md:h-screen"
-          fill="white"
-        />
-        <Spotlight
-          className="h-[60vh] md:h-[80vh] w-[70vw] md:w-[50vw] top-10 left-[80%] md:left-full"
-          fill="purple"
-        />
-        <Spotlight
-          className="left-1/2 md:left-80 top-28 h-[60vh] md:h-[80vh] w-[70vw] md:w-[50vw]"
-          fill="blue"
-        />
-      </div>
+import type { AnimationConfig, SiteContent } from "@/lib/content";
 
-      {/**
-       *  UI: grid
-       *  change bg color to bg-black-100 and reduce grid color from
-       *  0.2 to 0.03
-       */}
-      <div
-        className="h-screen w-full dark:bg-black-100 bg-white dark:bg-grid-white/[0.03] bg-grid-black-100/[0.2]
-       absolute top-0 left-0 flex items-center justify-center"
-      >
-        {/* Radial gradient for the container to give a faded look */}
-        <div
-          // chnage the bg to bg-black-100, so it matches the bg color and will blend in
-          className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black-100
-         bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
-        />
-      </div>
-
-      <div className="relative z-10 flex items-center justify-center px-4 md:px-0">
-        <div className="w-full max-w-[95vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-[10px] md:text-xs text-center text-blue-100 max-w-80">
-            Full Stack Developer | AI Enthusiast
-          </p>
-
-          {/**
-           *  Link: https://ui.aceternity.com/components/text-generate-effect
-           *
-           *  change md:text-6xl, add more responsive code
-           */}
-          <TextGenerateEffect
-            words="Koustubh Kulkarni"
-            className="text-center text-3xl sm:text-[40px] md:text-5xl lg:text-6xl mt-3 md:mt-4"
-          />
-
-          <p className="text-center md:tracking-wider mb-6 md:mb-8 text-xs sm:text-sm md:text-lg lg:text-xl mt-3 md:mt-4 px-2 md:px-0">
-            Crafting scalable, intelligent and interactive solutions with
-            cutting-edge tech.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-3 mt-3 md:mt-4 w-full max-w-md">
-            <div className="w-[calc(33%-0.5rem)]">
-              <a href="/resume1.pdf" target="_blank" rel="noopener noreferrer">
-                <MagicButton
-                  title="Resume"
-                  icon={<HiOutlineDocumentDownload />}
-                  position="left"
-                  otherClasses="!mt-0 !w-full text-xs sm:text-sm"
-                />
-              </a>
-            </div>
-            <div className="w-[calc(33%-0.5rem)]">
-              <a
-                href="https://github.com/koustubh-k/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MagicButton
-                  title="GitHub"
-                  icon={<FaGithub />}
-                  position="left"
-                  otherClasses="!mt-0 !w-full text-xs sm:text-sm"
-                />
-              </a>
-            </div>
-            <div className="w-[calc(33%-0.5rem)]">
-              <a
-                href="https://www.linkedin.com/in/koustubh-kulkarni-35625a1aa/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MagicButton
-                  title="LinkedIn"
-                  icon={<FaLinkedin />}
-                  position="left"
-                  otherClasses="!mt-0 !w-full text-xs sm:text-sm"
-                />
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-6 md:mt-8 w-full max-w-[200px]">
-            <a href="#about">
-              <MagicButton
-                title="Learn More"
-                icon={<FaLocationArrow />}
-                position="right"
-                otherClasses="!mt-0"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+type HeroProps = {
+  site: SiteContent;
+  motionConfig: AnimationConfig;
 };
 
-export default Hero;
+export default function Hero({ site, motionConfig }: HeroProps) {
+  const sectionRef = useRef<HTMLElement | null>(null);
+  const targetRef = useRef({ x: 24, y: 38 });
+  const currentRef = useRef({ x: 24, y: 38 });
+  const rafRef = useRef<number | null>(null);
+  const [spotlight, setSpotlight] = useState({ x: 24, y: 38 });
+
+  useEffect(() => {
+    const tick = () => {
+      currentRef.current.x += (targetRef.current.x - currentRef.current.x) * 0.08;
+      currentRef.current.y += (targetRef.current.y - currentRef.current.y) * 0.08;
+
+      setSpotlight({
+        x: currentRef.current.x,
+        y: currentRef.current.y,
+      });
+
+      rafRef.current = window.requestAnimationFrame(tick);
+    };
+
+    rafRef.current = window.requestAnimationFrame(tick);
+
+    return () => {
+      if (rafRef.current) {
+        window.cancelAnimationFrame(rafRef.current);
+      }
+    };
+  }, []);
+
+  const socialLinks = useMemo(
+    () => [
+      { label: "GitHub", href: site.github, icon: Github },
+      { label: "LinkedIn", href: site.linkedin, icon: Linkedin },
+      { label: "Email", href: site.email ? `mailto:${site.email}` : "", icon: Mail },
+    ].filter((item) => item.href),
+    [site.email, site.github, site.linkedin],
+  );
+
+  return (
+    <section
+      id="home"
+      ref={sectionRef}
+      className="relative flex min-h-screen items-center overflow-hidden pt-24"
+      onMouseMove={(event) => {
+        const bounds = sectionRef.current?.getBoundingClientRect();
+        if (!bounds) {
+          return;
+        }
+
+        const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+        const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+        targetRef.current = { x, y };
+      }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `radial-gradient(420px circle at ${spotlight.x}% ${spotlight.y}%, color-mix(in srgb, var(--accent-glow) 36%, transparent), transparent 62%)`,
+        }}
+      />
+
+      <div className="section-shell relative z-10 grid items-center gap-10 py-14 lg:grid-cols-[1.2fr_0.8fr]">
+        <div>
+          {site.availability ? (
+            <motion.p
+              className="mb-5 inline-flex rounded-full border border-[color:var(--accent-secondary)]/60 bg-[color:var(--accent-secondary)]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em]"
+              initial={{ opacity: 0, y: motionConfig.distance }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionConfig.duration }}
+            >
+              {site.availability}
+            </motion.p>
+          ) : null}
+
+          <motion.h1
+            className="section-title text-4xl md:text-6xl"
+            initial={{ opacity: 0, y: motionConfig.distance }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: motionConfig.duration, delay: 0.06 }}
+            style={{ color: "var(--text-primary)" }}
+          >
+            {site.name}
+          </motion.h1>
+
+          {site.title ? (
+            <motion.p
+              className="mt-3 text-xl font-medium"
+              initial={{ opacity: 0, y: motionConfig.distance }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionConfig.duration, delay: 0.12 }}
+              style={{ color: "var(--accent-primary)" }}
+            >
+              {site.title}
+            </motion.p>
+          ) : null}
+
+          {site.tagline ? (
+            <motion.p
+              className="mt-5 max-w-2xl text-base leading-relaxed muted-copy md:text-lg"
+              initial={{ opacity: 0, y: motionConfig.distance }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionConfig.duration, delay: 0.18 }}
+            >
+              {site.tagline}
+            </motion.p>
+          ) : null}
+
+          <motion.div
+            className="mt-8 flex flex-wrap gap-4"
+            initial={{ opacity: 0, y: motionConfig.distance }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: motionConfig.duration, delay: 0.24 }}
+          >
+            <div className="relative inline-flex rounded-[var(--radius)] p-[1px]">
+              <span className="absolute inset-0 animate-[spin_3.2s_linear_infinite] rounded-[var(--radius)] bg-[conic-gradient(from_180deg,var(--accent-primary),color-mix(in_srgb,var(--accent-primary)_25%,transparent),var(--accent-primary))]" />
+              <a
+                className="relative inline-flex h-12 min-w-[150px] items-center justify-center rounded-[var(--radius)] bg-[color:var(--bg-base)] px-5 text-sm font-semibold"
+                href="#projects"
+              >
+                {site.ui.labels.view_projects_button}
+              </a>
+            </div>
+
+            {site.show_resume_button && site.resume_file ? (
+              <a
+                className="inline-flex h-12 min-w-[170px] items-center justify-center rounded-[var(--radius)] border border-white/20 px-5 text-sm font-semibold"
+                download
+                href={site.resume_file}
+              >
+                {site.ui.labels.download_resume_button}
+              </a>
+            ) : null}
+          </motion.div>
+
+          {socialLinks.length > 0 ? (
+            <motion.div
+              className="mt-7 flex items-center gap-3"
+              initial={{ opacity: 0, y: motionConfig.distance }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: motionConfig.duration, delay: 0.3 }}
+            >
+              {socialLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius)] border border-white/20 text-[color:var(--text-secondary)] transition hover:-translate-y-1 hover:text-[color:var(--text-primary)]"
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
+                    rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                    aria-label={link.label}
+                  >
+                    <Icon size={18} />
+                  </a>
+                );
+              })}
+            </motion.div>
+          ) : null}
+        </div>
+
+        <motion.aside
+          className="surface-card relative max-w-xl overflow-hidden p-6"
+          initial={{ opacity: 0, y: motionConfig.distance }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: motionConfig.duration, delay: 0.2 }}
+        >
+          <div className="mb-5 flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-400/85" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-300/90" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/85" />
+          </div>
+
+          <p className="mono-tag text-sm text-[color:var(--text-secondary)]">{site.ui.labels.terminal_title}</p>
+          <p className="mono-tag mt-4 text-base md:text-lg">
+            {site.ui.labels.terminal_command}
+            <span className="ml-1 inline-block h-5 w-[2px] animate-pulse align-middle bg-[color:var(--accent-secondary)]" />
+          </p>
+          <p className="mt-6 text-sm leading-relaxed muted-copy">
+            {site.ui.labels.terminal_description}
+          </p>
+        </motion.aside>
+      </div>
+    </section>
+  );
+}

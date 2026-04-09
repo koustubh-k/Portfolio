@@ -1,58 +1,92 @@
-import React from "react";
+﻿"use client";
+
 import Image from "next/image";
-import { experience } from "@/data";
-import { Button } from "./ui/MovingBorders";
+import { Briefcase } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
-const Experience = () => {
-  return (
-    <div className="py-20 w-full" id="experience">
-      <h1 className="heading">
-        My <span className="text-purple">work experience</span>
-      </h1>
+import type { AnimationConfig, SiteContent } from "@/lib/content";
 
-      <div className="w-full mt-12 grid lg:grid-cols-4 grid-cols-1 gap-10">
-        {experience.map((card) => (
-          <Button
-            key={card.id}
-            //   random duration will be fun , I think , may be not
-            duration={Math.floor(Math.random() * 10000) + 10000}
-            borderRadius="1.75rem"
-            style={{
-              //   add these two
-              //   you can generate the color from here https://cssgradient.io/
-              background: "rgb(4,7,29)",
-              backgroundColor:
-                "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-              // add this border radius to make it more rounded so that the moving border is more realistic
-              borderRadius: `calc(1.75rem* 0.96)`,
-            }}
-            // remove bg-white dark:bg-slate-900
-            className="flex-1 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-          >
-            <div className="flex lg:flex-row flex-col lg:items-center p-3 py-6 md:p-5 lg:p-10 gap-2">
-              <div className="relative lg:w-32 md:w-20 w-16 aspect-square">
-                <Image
-                  src={card.thumbnail}
-                  alt={`${card.title} thumbnail`}
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 64px, (max-width: 1024px) 80px, 128px"
-                />
-              </div>
-              <div className="lg:ms-5">
-                <h1 className="text-start text-xl md:text-2xl font-bold">
-                  {card.title}
-                </h1>
-                <p className="text-start text-white-100 mt-3 font-semibold">
-                  {card.description}
-                </p>
-              </div>
-            </div>
-          </Button>
-        ))}
-      </div>
-    </div>
-  );
+type ExperienceProps = {
+  site: SiteContent;
+  motionConfig: AnimationConfig;
 };
 
-export default Experience;
+export default function Experience({ site, motionConfig }: ExperienceProps) {
+  const timelineRef = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(timelineRef, { once: true, margin: "-15% 0px -15% 0px" });
+
+  if (site.experience.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className="section-shell py-14" id="experience">
+      <h2 className="section-title">{site.ui.section_titles.experience}</h2>
+
+      <div ref={timelineRef} className="relative mt-8 pl-10 md:pl-14">
+        <motion.span
+          aria-hidden
+          className="absolute left-2 top-0 w-[2px] origin-top md:left-4"
+          style={{
+            background: "linear-gradient(var(--accent-primary), var(--accent-secondary))",
+            height: "100%",
+          }}
+          initial={{ scaleY: 0 }}
+          animate={inView ? { scaleY: 1 } : { scaleY: 0 }}
+          transition={{ duration: motionConfig.duration + 0.25, ease: "easeOut" }}
+        />
+
+        <div className="space-y-7">
+          {site.experience.map((item, index) => (
+            <motion.article
+              className="surface-card relative p-5 md:p-6"
+              key={`${item.company}-${item.role}-${index}`}
+              initial={{ opacity: 0, y: motionConfig.distance }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: motionConfig.duration, delay: index * motionConfig.stagger }}
+            >
+              <span
+                aria-hidden
+                className="absolute -left-[35px] top-6 flex h-6 w-6 items-center justify-center rounded-full border border-[color:var(--accent-primary)] bg-[color:var(--bg-base)] md:-left-[47px]"
+              >
+                {item.logo ? (
+                  <Image
+                    alt={`${item.company} logo`}
+                    height={18}
+                    src={item.logo}
+                    width={18}
+                  />
+                ) : (
+                  <Briefcase size={12} />
+                )}
+              </span>
+
+              <header className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-xl font-semibold">{item.role}</h3>
+                  <p className="mt-1 text-sm muted-copy">{item.company}{item.location ? ` - ${item.location}` : ""}</p>
+                </div>
+                {item.duration ? <p className="text-sm muted-copy">{item.duration}</p> : null}
+              </header>
+
+              {item.highlights.length > 0 ? (
+                <ul className="mt-4 space-y-2 text-sm leading-relaxed muted-copy md:text-base">
+                  {item.highlights.map((highlight) => (
+                    <li className="flex gap-2" key={highlight}>
+                      <span className="pt-[2px]" style={{ color: "var(--accent-secondary)" }}>
+                        -
+                      </span>
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </motion.article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
