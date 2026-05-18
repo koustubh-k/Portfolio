@@ -4,7 +4,7 @@
 # 1. HERO / IDENTITY
 name: "Koustubh Kulkarni"
 title: "Software Engineer"
-tagline: "I engineer reliable, scalable systems - from backend APIs to applied AI."
+tagline: "I engineer reliable, scalable systems - from backend APIs to applied AI and ML."
 location: "Bangalore, India"
 availability: "Open to Opportunities"
 profile_photo: "/assets/profile.jpeg"
@@ -18,7 +18,7 @@ bio: |
   designing systems that are fast, reliable, and actually useful.
 
   Outside work: ACM ICPC Regionalist, CodeChef 3-star, and a competitive problem
-  solver with 400+ DSA problems solved. I care about clean architecture, clear
+  solver with 500+ DSA problems solved. I care about clean architecture, clear
   thinking, and shipping things that matter.
 
 interests:
@@ -132,7 +132,7 @@ achievements:
 email: "kulkarni.k2004@gmail.com"
 phone: "+91-8660708395"
 website: "https://koustubh.dev"
-linkedin: "https://linkedin.com/in/koustubhkulkarni"
+linkedin: "https://www.linkedin.com/in/koustubh-kulkarni-35625a1aa/"
 github: "https://github.com/koustubh-k"
 twitter: ""
 show_contact_form: true
