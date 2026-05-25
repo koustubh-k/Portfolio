@@ -131,7 +131,7 @@ achievements:
 # 9. CONTACT & SOCIAL
 email: "kulkarni.k2004@gmail.com"
 phone: "+91-8660708395"
-website: "https://koustubh.dev"
+website: "https://portfolio-j617m7zvb-koustubh-ks-projects.vercel.app/"
 linkedin: "https://www.linkedin.com/in/koustubh-kulkarni-35625a1aa/"
 github: "https://github.com/koustubh-k"
 twitter: ""
